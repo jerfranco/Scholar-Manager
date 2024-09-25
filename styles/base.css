@@ -8,6 +8,8 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 1rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
     align-items: center;
     /* background-color: #3f7364; */
     /* background-color: #fdf5df; */
@@ -34,7 +36,8 @@ nav li a {
     /* text-align: center; */
     height: 80vh;
     background-color: #fdf5df;
-    color: #5ebec4;
+    /* color: #5ebec4; */
+    color: #194043;
     padding: 5rem;
     display: flex;
 }
@@ -55,11 +58,18 @@ nav li a {
 #why {
     text-align: center;
     /* height: 33vh; */
-    background-color: #50a1a7;
+    background-color: #83BFC3;
     padding: 5rem;
 }
+#why h1 {
+    font-size: 50px;
+}
+#why p {
+    font-size: 20px;
+    padding-top: 2rem;
+}
 #signup {
-    background-color: blue;
+    background-color: #0000E0;
     padding: 1rem;
     border-radius: 50px;
     color: white;
