@@ -34,7 +34,7 @@ nav li a {
 }
 #intro {
     /* text-align: center; */
-    height: 80vh;
+    min-height: 80vh;
     background-color: #fdf5df;
     /* color: #5ebec4; */
     color: #194043;
@@ -60,11 +60,19 @@ nav li a {
     /* height: 33vh; */
     background-color: #83BFC3;
     padding: 5rem;
-    margin: 3rem;
+    margin: 2rem;
+    display: flex;
+}
+#why img {
+    border-radius: 15px;
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
 }
 #why h1 {
     font-size: 50px;
-    width: 50%
+    width: 65%;
+    font-family: 'Times New Roman', Times, serif;
 }
 #why p {
     font-size: 20px;
@@ -73,15 +81,23 @@ nav li a {
 #how {
     background-color: #e8fdac;
     padding: 5rem;
-    margin: 3rem;
+    margin: 2rem;
+    display: flex;
+}
+#how img {
+    border-radius: 15px;
+    width: 40%;
+    margin-left: auto;
 }
 #how h1 {
     font-size: 50px;
-    width: 50%
+    width: 50%;
+    font-family: 'Times New Roman', Times, serif;
 }
 #how p {
     font-size: 20px;
     padding-top: 2rem;
+    width: 80%;
 }
 #click {
     background-color: orange;
@@ -90,9 +106,10 @@ nav li a {
     font-size: 22px;
     margin-top: 2rem;
     font-weight: bold;
+    border-radius: 5px;
 }
 #signup {
-    background-color: #0000E0;
+    background-color: #0C4B0C;
     padding: 1rem;
     border-radius: 50px;
     color: white;
@@ -113,17 +130,61 @@ footer {
 }
 #who {
     text-align: center;
-    padding: 5rem;
+    /* padding: 5rem; */
     min-height: 65vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    /* flex-direction: column; */
+    align-items: stretch;
+}
+#who img {
+    width: 50%;
+    height: auto;
+    object-fit: cover;
 }
 #who h1{
     font-size: 50px;
+    font-family: 'Times New Roman', Times, serif;
 }
 #who p {
-    font-size: 35px;
+    font-size: 30px;
+    line-height: 65px;
+    
+}
+#we {
+    width: 50%;
+    background-color: #0C4B0C;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    color: white;
+}
+#mission {
+    text-align: center;
+    min-height: 65vh;
+    display: flex;
+}
+#mission img {
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+}
+#mission h1 {
+    font-size: 50px;
+    font-family: 'Times New Roman', Times, serif;
+}
+#mission p {
+    font-size: 30px;
+    line-height: 65px;
+}
+#give {
+    text-align: center;
+    min-height: 65vh;
+}
+#give h1 {
+    font-size: 50px;
+    font-family: 'Times New Roman', Times, serif;
 }
 /* #offer {
     display: grid;
