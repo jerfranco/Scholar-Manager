@@ -75,8 +75,9 @@ nav li a {
     font-family: 'Times New Roman', Times, serif;
 }
 #why p {
-    font-size: 20px;
+    font-size: 25px;
     padding-top: 2rem;
+    width: 65%;
 }
 #how {
     background-color: #e8fdac;
@@ -95,9 +96,9 @@ nav li a {
     font-family: 'Times New Roman', Times, serif;
 }
 #how p {
-    font-size: 20px;
+    font-size: 25px;
     padding-top: 2rem;
-    width: 80%;
+    width: 65%;
 }
 #click {
     background-color: orange;
@@ -160,10 +161,20 @@ footer {
     padding: 3rem;
     color: white;
 }
+#miss {
+    width: 50%;
+    background-color: #abdca7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem;
+    color: black;
+}
 #mission {
     text-align: center;
     min-height: 65vh;
     display: flex;
+    max-height: 569.7px;
 }
 #mission img {
     width: 50%;
@@ -245,4 +256,21 @@ footer {
 
 .dot.active {
     background-color: #000; /* Change the color of the active dot */
+}
+#login {
+    /* display: flex; */
+    flex-direction: column;
+    /* align-items: center; */
+    width: 50%;
+    justify-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 3rem;
+}
+#login form {
+    display: flex;
+    flex-direction: column;
 }
