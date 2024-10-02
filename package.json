@@ -2,7 +2,7 @@
   "name": "scholar-manager",
   "version": "1.0.0",
   "description": "Web app for finances",
-  "main": "index.js",
+  "main": "mongoDB/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node mongoDB/index.js"
