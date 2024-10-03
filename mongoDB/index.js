@@ -45,26 +45,34 @@ app.get("/signup", (req, res) => {
 
 
 app.post("/signup", async (req, res) => {
+    try {
+        const data = {
+            name: req.body.username,
+            password: req.body.password
+        };
 
-    const data = {
-        name: req.body.username,
-        password: req.body.password
-    }
+        // Check if user already exists
+        const existingUser = await collection.findOne({ name: data.name });
+        if (existingUser) {
+            return res.send("User already exists. Please choose a different username.");
+        }
 
-
-    const existingUser = await collection.findOne({ name: data.name });
-    if(existingUser){
-        res.send("User already exists. Please choose a different username.");
-    } else {
+        // Hash the password and store it in the database
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(data.password, saltRounds);
-
         data.password = hashedPassword;
 
-        const userdata = await collection.insertMany(data);
-        console.log(userdata);
+        // Insert the new user data into the collection
+        await collection.insertMany([data]);
+
+        // Redirect to login page with a success message
+        res.redirect('/login?success=Account created successfully! Please log in.');
+    } catch (error) {
+        console.error('Signup error:', error);
+        res.status(500).send('An error occurred during signup. Please try again.');
     }
 });
+
 
 app.post("/login", async (req, res) => {
     try {
@@ -82,7 +90,8 @@ app.post("/login", async (req, res) => {
         }
     }
     catch {
-
+        console.error('Login error:', error);
+        res.status(500).send('An error occurred during login. Please try again.');
     }
 })
 
