@@ -1,6 +1,12 @@
-const mongoose = require('mongoose');
-const connect = mongoose.connect('mongodb+srv://MrAdoboMan:waFJTryUqCQUbcwn@scholarmanagercluster.6ucrp.mongodb.net/');
+require('dotenv').config({ path: './login.env' });
 
+const mongoose = require('mongoose');
+const dbUsername = 'MrAdoboMan';
+const dbPassword = process.env.DB_PASSWORD;
+const dbCluster = 'scholarmanagercluster.6ucrp.mongodb.net';
+const uri = `mongodb+srv://${dbUsername}:${dbPassword}@${dbCluster}/`;
+
+const connect = mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 connect.then(() => {
     console.log("Database connected successfully");
