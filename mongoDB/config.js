@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './login.env' });
+require('dotenv').config();
 
 const mongoose = require('mongoose');
 const dbUsername = 'MrAdoboMan';
