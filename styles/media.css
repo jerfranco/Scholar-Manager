@@ -14,12 +14,15 @@
         margin: 0;
         margin-top: 1rem;
         margin-bottom: 1rem;
+        padding: 1rem;
     }
     #why h1{
         width: auto;
+        text-align: center;
     }
     #why p {
         width: auto;
+        text-align: center;
     }
 
     #why img {
@@ -31,21 +34,24 @@
         flex-direction: column;
         width: 100%;
         margin: 0;
+        padding: 1rem;
         margin-top: 1rem;
-        margin-bottom: 1rem;
     }
 
     #how h1 {
         width: auto;
+        text-align: center;
     }
 
     #how p {
         width: auto;
+        text-align: center;
     }
 
     #how img {
         width: 100%;
         padding: 1rem;
+        border-radius: 5px;
     }
 
     nav li a {
@@ -55,5 +61,18 @@
     #click {
         margin: 0;
         margin-left: auto;
+    }
+    
+    #intro {
+        padding: 1rem;
+    }
+
+    #intro h1 {
+        text-align: center;
+    }
+
+    #intro p {
+        padding: 1rem;
+        text-align: center;
     }
 }
