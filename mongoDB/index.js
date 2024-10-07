@@ -83,7 +83,7 @@ app.post("/login", async (req, res) => {
 
         const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
         if(isPasswordMatch) {
-            res.render("home")
+            res.render("index")
         }
         else {
             req.send("Invalid username or password");
