@@ -2,4 +2,58 @@
     header {
         padding: 1rem;
     }
+
+    #intro img {
+        display: none;
+    }
+
+    #why {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    #why h1{
+        width: auto;
+    }
+    #why p {
+        width: auto;
+    }
+
+    #why img {
+        margin: 1rem;
+    }
+
+    #how {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    #how h1 {
+        width: auto;
+    }
+
+    #how p {
+        width: auto;
+    }
+
+    #how img {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    nav li a {
+        padding: 0.5rem;
+    }
+
+    #click {
+        margin: 0;
+        margin-left: auto;
+    }
 }
