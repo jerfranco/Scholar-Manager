@@ -131,8 +131,8 @@ footer {
     justify-content: center;
     align-items: center;
     /* height: 10vh; */
-    /* background-color: black; */
-    color: white;
+    background-color: black;
+    color: black;
     flex-direction: column;
     line-height: 30px;
     padding: 2rem;
