@@ -19,11 +19,11 @@ app.use(express.urlencoded({ extended: false }));
 
 app.set('view engine', 'ejs');
 
-// app.use(cookieParser());
-// app.use(function(req, res, next) {
-//     console.log(req.cookies);
-//     next();
-// });
+app.use(cookieParser());
+app.use(function(req, res, next) {
+    console.log(req.cookies);
+    next();
+});
 
 // app.use(function(req, res, next) {
 //     var cookie = req.cookies;
@@ -97,11 +97,11 @@ app.post("/login", async (req, res) => {
         if(!check) {
             res.send("User not found");
         }
-        // console.log(check);
+        console.log(check);
 
         const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
         if(isPasswordMatch) {
-            // res.cookie("userID", check._id.toString(), {maxAge: 100000000, httpOnly: true});
+            res.cookie("userID", check._id.toString(), {maxAge: 100000000, httpOnly: true});
             res.render("index")
         }
         else {
@@ -114,10 +114,10 @@ app.post("/login", async (req, res) => {
     }
 })
 
-// app.post("/logout", (req, res) => {
-//     res.clearCookie("userID");
-//     res.redirect("/index");
-// });
+app.post("/logout", (req, res) => {
+    res.clearCookie("userID");
+    res.redirect("/index");
+});
 
 const port = 5000;
 app.listen(port, () => {
