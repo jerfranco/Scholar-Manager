@@ -2,6 +2,7 @@ const express = require('express');
 const pasth = require('path');
 const bcrypt = require('bcrypt');
 const collection = require('./config');
+const cookieParser = require('cookie-parser');
 
 
 const app = express();
@@ -17,6 +18,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.set('view engine', 'ejs');
+
+// app.use(cookieParser());
+// app.use(function(req, res, next) {
+//     console.log(req.cookies);
+//     next();
+// });
+
+// app.use(function(req, res, next) {
+//     var cookie = req.cookies;
+//     console.log(cookie);
+// });
+    
 
 app.use(express.static("public"));
 app.use(express.static("images"));
@@ -41,6 +54,10 @@ app.get("/login", (req, res) => {
 
 app.get("/signup", (req, res) => {
     res.render("signup");
+});
+
+app.get("/finances", (req, res) => {
+    res.render("finances");
 });
 
 
@@ -80,9 +97,11 @@ app.post("/login", async (req, res) => {
         if(!check) {
             res.send("User not found");
         }
+        // console.log(check);
 
         const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
         if(isPasswordMatch) {
+            // res.cookie("userID", check._id.toString(), {maxAge: 100000000, httpOnly: true});
             res.render("index")
         }
         else {
@@ -95,6 +114,10 @@ app.post("/login", async (req, res) => {
     }
 })
 
+// app.post("/logout", (req, res) => {
+//     res.clearCookie("userID");
+//     res.redirect("/index");
+// });
 
 const port = 5000;
 app.listen(port, () => {

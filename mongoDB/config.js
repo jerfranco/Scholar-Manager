@@ -30,3 +30,5 @@ const LoginScheme = new mongoose.Schema({
 const collection = new mongoose.model("Users", LoginScheme);
 
 module.exports = collection;
+
+

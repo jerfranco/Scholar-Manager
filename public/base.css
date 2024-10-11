@@ -43,7 +43,6 @@ nav li a {
 }
 #intro h1 {
     font-size: 70px;
-    padding-top: 4rem;
 }
 #intro p {
     font-size: 40px;
@@ -76,9 +75,8 @@ nav li a {
     font-family: 'Times New Roman', Times, serif;
 }
 #why p {
-    font-size: 25px;
+    font-size: 20px;
     padding-top: 2rem;
-    width: 65%;
 }
 #how {
     background-color: #e8fdac;
@@ -97,9 +95,9 @@ nav li a {
     font-family: 'Times New Roman', Times, serif;
 }
 #how p {
-    font-size: 25px;
+    font-size: 20px;
     padding-top: 2rem;
-    width: 65%;
+    width: 80%;
 }
 #click {
     background-color: orange;
@@ -116,13 +114,6 @@ nav li a {
     border-radius: 50px;
     color: white;
 }
-/* form#logout{
-    display: inline-block;
-}
-form#logout button {
-    display: inline;
-    background-color: #0C4B0C;
-} */
 main {
     min-height: 100vh;
 }
@@ -131,7 +122,7 @@ footer {
     justify-content: center;
     align-items: center;
     /* height: 10vh; */
-    /* background-color: black; */
+    background-color: black;
     color: white;
     flex-direction: column;
     line-height: 30px;
@@ -157,6 +148,7 @@ footer {
 #who p {
     font-size: 30px;
     line-height: 65px;
+    
 }
 #we {
     width: 50%;
@@ -199,7 +191,6 @@ footer {
 #give {
     text-align: center;
     min-height: 65vh;
-    background-color: lightblue;
 }
 #give h1 {
     font-size: 50px;
