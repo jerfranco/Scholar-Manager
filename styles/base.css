@@ -126,7 +126,7 @@ form#logout button {
 main {
     min-height: 100vh;
 }
-/* footer {
+footer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -136,7 +136,7 @@ main {
     flex-direction: column;
     line-height: 30px;
     padding: 2rem;
-} */
+}
 #who {
     text-align: center;
     /* padding: 5rem; */
