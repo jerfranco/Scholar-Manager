@@ -132,7 +132,7 @@ footer {
     align-items: center;
     height: 10vh;
     background-color: black;
-    color: black;
+    color: white;
     flex-direction: column;
     line-height: 30px;
     padding: 2rem;
