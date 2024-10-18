@@ -54,8 +54,42 @@
         border-radius: 5px;
     }
 
-    nav li a {
+    /* nav li a {
         padding: 0.5rem;
+    } */
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: white; /* Optional: Add a background for better visibility */
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 100%;
+        /* padding: 2rem; */
+    }
+    .hamburger {
+        display: block; /* Show the hamburger icon */
+    }
+
+    nav ul.active {
+        display: flex; /* Show menu when active class is added */
+    }
+
+    nav ul li {
+        margin: 25px 0; /* Stack the menu items vertically */
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
+    nav ul li a {
+        padding: 1rem;
+    }
+
+    #signup {
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     #click {

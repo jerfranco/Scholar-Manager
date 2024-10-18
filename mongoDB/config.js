@@ -16,7 +16,7 @@ connect.then(() => {
 });
 
 
-const LoginScheme = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -27,8 +27,35 @@ const LoginScheme = new mongoose.Schema({
     }
 });
 
-const collection = new mongoose.model("Users", LoginScheme);
+//! Finance Schema
+const FinanceSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users',
+        required: true
+    },
+    balance: {
+        type: Number,
+        required: true
+    },
+    transactions: [{
+        amount: Number,
+        date: {
+            type: Date,
+            default: Date.now
+        }
+    }]
+});
 
-module.exports = collection;
+const userModel = new mongoose.model("Users", UserSchema);
+const financeModel = new mongoose.model("Finance", FinanceSchema);
+
+// module.exports = collection;
+// module.exports = financeCollection;
+
+module.exports = {
+    userModel,
+    financeModel
+};
 
 

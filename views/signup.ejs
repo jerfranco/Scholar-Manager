@@ -11,12 +11,14 @@
 
         <link rel="stylesheet" href="/style.css">
         <link rel="stylesheet" href="/media.css">
+        <link ref="stylesheet" href="/base.css">
 
     </head>
     <body>
         <header>
             <h1><a href=/index>SM</a></h1>
             <nav>
+                <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
                 <ul>
                     <li>
                         <a href="/index">Home</a>
@@ -24,6 +26,9 @@
                         <a href="/login">Login</a>
                         <a href="/finances">Finances</a>
                         <a id="signup" href="#">Sign Up</a>
+                        <form id="logout" action="/logout" method="POST">
+                            <button type="submit">Logout</button>
+                        </form>
                     </li>
                 </ul>
             </nav>
@@ -49,5 +54,6 @@
             <p>&copy; 2024 Scholar Manager</p>
             <p>Jeremiah Franco</p>
         </footer>
+        <script src="/menu.js"></script>
     </body>
 </html>

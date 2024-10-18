@@ -32,6 +32,16 @@ nav li a {
     padding-right: 1rem;
     padding-left: 1rem;
 }
+
+nav ul {
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+.hamburger {
+    display: none;
+}
+
 #intro {
     /* text-align: center; */
     min-height: 80vh;
@@ -116,13 +126,18 @@ nav li a {
     border-radius: 50px;
     color: white;
 }
-/* form#logout{
+form#logout{
     display: inline-block;
 }
 form#logout button {
     display: inline;
     background-color: #0C4B0C;
-} */
+    color: white;
+    padding: 1rem;
+    border-radius: 50px;
+    font-size: 14px;
+    cursor: pointer;
+}
 main {
     min-height: 100vh;
 }

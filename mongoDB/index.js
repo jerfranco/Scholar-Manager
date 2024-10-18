@@ -1,37 +1,23 @@
 const express = require('express');
-const pasth = require('path');
+const path = require('path');
 const bcrypt = require('bcrypt');
-const collection = require('./config');
+const { userModel, financeModel } = require('./config');
 const cookieParser = require('cookie-parser');
 
-
 const app = express();
-// const PORT = process.env.PORT || 5000;
-
-// app.listen (PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-// });
-
 
 app.use(express.json());
-
 app.use(express.urlencoded({ extended: false }));
 
 app.set('view engine', 'ejs');
 
 app.use(cookieParser());
+
 app.use(function(req, res, next) {
     console.log(req.cookies);
     next();
 });
 
-// app.use(function(req, res, next) {
-//     var cookie = req.cookies;
-//     console.log(cookie);
-// });
-    
-
-// app.use(express.static("public"));
 app.use(express.static("images"));
 app.use(express.static("styles"));
 app.use(express.static("scripts"));
@@ -56,11 +42,6 @@ app.get("/signup", (req, res) => {
     res.render("signup");
 });
 
-app.get("/finances", (req, res) => {
-    res.render("finances");
-});
-
-
 app.post("/signup", async (req, res) => {
     try {
         const data = {
@@ -69,7 +50,7 @@ app.post("/signup", async (req, res) => {
         };
 
         // Check if user already exists
-        const existingUser = await collection.findOne({ name: data.name });
+        const existingUser = await userModel.findOne({ name: data.name });
         if (existingUser) {
             return res.send("User already exists. Please choose a different username.");
         }
@@ -80,7 +61,7 @@ app.post("/signup", async (req, res) => {
         data.password = hashedPassword;
 
         // Insert the new user data into the collection
-        await collection.insertMany([data]);
+        await userModel.insertMany([data]);
 
         // Redirect to login page with a success message
         res.redirect('/login?success=Account created successfully! Please log in.');
@@ -90,29 +71,84 @@ app.post("/signup", async (req, res) => {
     }
 });
 
-
 app.post("/login", async (req, res) => {
     try {
-        const check = await collection.findOne({name: req.body.username});
-        if(!check) {
-            res.send("User not found");
+        const check = await userModel.findOne({name: req.body.username});
+        if (!check) {
+            return res.send("User not found");
         }
-        console.log(check);
 
         const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
-        if(isPasswordMatch) {
-            res.cookie("userID", check._id.toString(), {maxAge: 100000000, httpOnly: true});
-            res.render("index")
+        if (isPasswordMatch) {
+            // res.cookie("userID", check._id.toString(), { maxAge: 100000000, httpOnly: true });
+            res.cookie("userID", check._id.toString(), { httpOnly: true });
+            res.render("index");
+        } else {
+            res.send("Invalid username or password");
         }
-        else {
-            req.send("Invalid username or password");
-        }
-    }
-    catch {
+    } catch (error) {
         console.error('Login error:', error);
         res.status(500).send('An error occurred during login. Please try again.');
     }
-})
+});
+
+app.get("/finances", async (req, res) => {
+    try {
+        const userId = req.cookies.userID; // Get userId from cookies
+
+        if (!userId) {
+            return res.status(401).send("User not logged in.");
+        }
+
+        // Query the finance model to find the finance record by userId
+        const userFinance = await financeModel.findOne({ userId });
+
+        // If no record is found, set balance to 0
+        const balance = userFinance ? userFinance.balance : 0;
+
+        // Render the finances page and pass the balance to the template
+        res.render("finances", { balance });
+    } catch (error) {
+        console.error('Error fetching finance data:', error);
+        res.status(500).send('An error occurred while fetching finance data.');
+    }
+});
+
+app.post("/finances", async (req, res) => {
+    try {
+        const { balance, transactionAmount } = req.body;
+        const userId = req.cookies.userID;
+
+        if (!userId) {
+            return res.status(401).send("User not logged in.");
+        }
+
+        //! Create or update a finance record for the logged-in user
+        let userFinance = await financeModel.findOne({ userId });
+
+        if (userFinance) {
+            //! Update existing finance record
+            userFinance.balance = balance;
+            userFinance.transactions.push({ amount: transactionAmount });
+        } else {
+            //! Create new finance record
+            userFinance = new financeModel({
+                userId,
+                balance,
+                transactions: [{ amount: transactionAmount }]
+                
+            });
+        }
+
+        await userFinance.save();
+
+        //! Redirect back to the finances page after saving
+        res.redirect("/finances");
+    } catch (error) {
+        console.error('Finance error:', error);
+        res.status(500).send('An error occurred while saving finance data.');
+    }
+});
 
 app.post("/logout", (req, res) => {
     res.clearCookie("userID");
