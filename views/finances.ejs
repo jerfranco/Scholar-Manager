@@ -16,7 +16,7 @@
             <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
             <ul>
                 <li>
-                    <a href="#">Home</a>
+                    <a href="/index">Home</a>
                     <a href="/about">About</a>
                     <a href="/login">Login</a>
                     <a href="/finances">Finances</a>
@@ -28,22 +28,70 @@
             </ul>
         </nav>
     </header>
-    <main>
-        <h1>Your Finances</h1>
+    <main id="financesMain">
+        <h1>Finances</h1>
 
         <!-- Display the balance -->
-        <p><strong>Current Balance:</strong> <%= balance%> </p>
-
-        <!-- Form to submit a new balance -->
-        <h2>Update Balance</h2>
-        <form action="/finances" method="POST">
-            <label for="balance">Balance:</label>
-            <input type="number" id="balance" name="balance" required>
-            <button type="submit">Submit</button>
-        </form>
+        <section id="finances">
+            <section id="balance">
+                <h2>Balance</h2>
+                <p><strong>Current Balance:</strong> <%= balance%> </p>
+        
+                <!-- Form to submit a new balance -->
+                <h2>Update Balance</h2>
+            
+                <section id="balanceForm">
+                    <form action="/finances" method="POST">
+                        <label for="balance">Balance:</label>
+                        <input type="number" id="balance" name="balance" required>
+                        <button type="submit">Submit</button>
+                    </form>
+                </section>
+            </section>
+            <section id="loans">
+                <h2>Loans</h2>
+        
+                <!-- Form to submit a new loan -->
+                <h2>Update Loans</h2>
+            </section>
+            <section id="income">
+                <h2>Income</h2>
+        
+                <!-- Form to submit a new income -->
+                <h2>Update Income</h2>
+            </section>
+                
+        </section>
+        
+        <div class = "grid-container">
+            <div class = "calculator-grid ">
+                <textarea type="text" id = "inputtext" placeholder="0"></textarea>
+                <button>C</button>
+                <button>DEL</button>
+                <button></button>
+                <button>+</button>
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button>-</button>
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>*</button>
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>/</button>
+                <button>00</button>
+                <button>0</button>
+                <button>.</button>
+                <button>=</button>
+            </div>
+        </div>
     </main>
     <footer>
     </footer>
     <script src="/menu.js"></script>
+    <script src="/calc.js"></script>
 </body>
 </html>
