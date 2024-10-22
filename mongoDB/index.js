@@ -23,23 +23,28 @@ app.use(express.static("styles"));
 app.use(express.static("scripts"));
 
 app.get("/", (req, res) => {
-    res.render("index");
+    const loggedIn = !!req.cookies.userID;
+    res.render("index", { loggedIn });
 });
 
 app.get("/about", (req, res) => {
-    res.render("about");
+    const loggedIn = !!req.cookies.userID;
+    res.render("about", { loggedIn });
 });
 
 app.get("/index", (req, res) => {
-    res.render("index");
+    const loggedIn = !!req.cookies.userID;
+    res.render("index", { loggedIn });
 });
 
 app.get("/login", (req, res) => {
-    res.render("login");
+    const loggedIn = !!req.cookies.userID;
+    res.render("login", { loggedIn });
 });
 
 app.get("/signup", (req, res) => {
-    res.render("signup");
+    const loggedIn = !!req.cookies.userID;
+    res.render("signup", { loggedIn });
 });
 
 app.post("/signup", async (req, res) => {
@@ -82,7 +87,8 @@ app.post("/login", async (req, res) => {
         if (isPasswordMatch) {
             // res.cookie("userID", check._id.toString(), { maxAge: 100000000, httpOnly: true });
             res.cookie("userID", check._id.toString(), { httpOnly: true });
-            res.render("index");
+            // res.render("index");
+            res.redirect("/index");
         } else {
             res.send("Invalid username or password");
         }
@@ -95,6 +101,7 @@ app.post("/login", async (req, res) => {
 app.get("/finances", async (req, res) => {
     try {
         const userId = req.cookies.userID; // Get userId from cookies
+        const loggedIn = !!userId;
 
         if (!userId) {
             return res.status(401).send("User not logged in.");
@@ -107,7 +114,7 @@ app.get("/finances", async (req, res) => {
         const balance = userFinance ? userFinance.balance : 0;
 
         // Render the finances page and pass the balance to the template
-        res.render("finances", { balance });
+        res.render("finances", { balance, loggedIn });
     } catch (error) {
         console.error('Error fetching finance data:', error);
         res.status(500).send('An error occurred while fetching finance data.');

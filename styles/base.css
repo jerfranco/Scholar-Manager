@@ -351,6 +351,7 @@ footer {
 
 #finances {
     display: flex;
+    flex-wrap: wrap;
 }
 
 #financesMain {

@@ -1,4 +1,4 @@
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 735px) {
     header {
         padding: 1rem;
     }
@@ -70,6 +70,7 @@
     }
     .hamburger {
         display: block;
+        cursor: pointer;
     }
 
     nav ul.active {
@@ -136,5 +137,15 @@
 
     #miss {
         width: 100%;
+    }
+
+    #finances {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #finances section {
+        margin: 1rem;
+        height: 33vh;
     }
 }
