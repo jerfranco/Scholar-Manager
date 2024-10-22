@@ -23,12 +23,15 @@
                     <li>
                         <a href="/index">Home</a>
                         <a href="/about">About</a>
-                        <a href="/login">Login</a>
                         <a href="/finances">Finances</a>
-                        <a id="signup" href="/signup">Sign Up</a>
-                        <form id="logout" action="/logout" method="POST">
-                            <button type="submit">Logout</button>
-                        </form>
+                        <% if (!loggedIn) { %> <!-- Show Login and Sign Up if not logged in -->
+                            <a href="/login">Login</a>
+                            <a id="signup" href="/signup">Sign Up</a>
+                        <% } else { %> <!-- Show Logout button if logged in -->
+                            <form id="logout" action="/logout" method="POST">
+                                <button type="submit">Logout</button>
+                            </form>
+                        <% } %>
                     </li>
                 </ul>
             </nav>
