@@ -113,49 +113,109 @@ app.get("/finances", async (req, res) => {
         // If no record is found, set balance to 0
         const balance = userFinance ? userFinance.balance : 0;
 
+        const loanAmount = userFinance ? userFinance.loanAmount : 0;
+        const interestRate = userFinance ? userFinance.interestRate : 0;
+        const currentLoan = loanAmount * (1 + interestRate / 100);
+
+        const incomeAmount = userFinance ? userFinance.income : 0;
+
         // Render the finances page and pass the balance to the template
-        res.render("finances", { balance, loggedIn });
+        res.render("finances", { balance, currentLoan, incomeAmount, loggedIn });
     } catch (error) {
         console.error('Error fetching finance data:', error);
         res.status(500).send('An error occurred while fetching finance data.');
     }
 });
 
+// app.post("/finances", async (req, res) => {
+//     try {
+//         // const { balance, transactionAmount } = req.body;
+//         const balance = parseFloat(req.body.balance) || 0;
+//         const loan = parseFloat(req.body.loan) || 0;
+//         const interest = parseFloat(req.body.interest) || 0;
+//         const income = parseFloat(req.body.income) || 0;
+//         const userId = req.cookies.userID;
+
+//         if (!userId) {
+//             return res.status(401).send("User not logged in.");
+//         }
+
+//         //! Create or update a finance record for the logged-in user
+//         let userFinance = await financeModel.findOne({ userId });
+
+//         if (userFinance) {
+//             //! Update existing finance record
+//             // userFinance.balance = balance;
+//             // userFinance.transactions.push({ amount: transactionAmount });
+//             if (!isNaN(balance)) userFinance.balance = balance;
+//             userFinance.loanAmount = loan;
+//             userFinance.interestRate = interest;
+//             userFinance.income = income;
+//         } else {
+//             //! Create new finance record
+//             // userFinance = new financeModel({
+//             //     userId,
+//             //     balance,
+//             //     transactions: [{ amount: transactionAmount }]
+                
+//             // });
+//             userFinance = new financeModel({
+//                 userId,
+//                 balance: balance || 0,
+//                 loanAmount: loan,
+//                 interestRate: interest,
+//                 income: income
+//             });
+//         }
+
+//         await userFinance.save();
+
+//         //! Redirect back to the finances page after saving
+//         res.redirect("/finances");
+//     } catch (error) {
+//         console.error('Finance error:', error);
+//         res.status(500).send('An error occurred while saving finance data.');
+//     }
+// });
+
 app.post("/finances", async (req, res) => {
     try {
-        const { balance, transactionAmount } = req.body;
         const userId = req.cookies.userID;
-
         if (!userId) {
             return res.status(401).send("User not logged in.");
         }
 
-        //! Create or update a finance record for the logged-in user
+        // Find the user's finance record
         let userFinance = await financeModel.findOne({ userId });
 
-        if (userFinance) {
-            //! Update existing finance record
-            userFinance.balance = balance;
-            userFinance.transactions.push({ amount: transactionAmount });
-        } else {
-            //! Create new finance record
-            userFinance = new financeModel({
-                userId,
-                balance,
-                transactions: [{ amount: transactionAmount }]
-                
-            });
+        if (!userFinance) {
+            userFinance = new financeModel({ userId });
+        }
+
+        // Check which form was submitted and update only relevant fields
+        if (req.body.formType === 'balanceForm') {
+            const balance = parseFloat(req.body.balance);
+            if (!isNaN(balance)) userFinance.balance = balance;
+        } else if (req.body.formType === 'loanForm') {
+            const loan = parseFloat(req.body.loan) || 0;
+            const interest = parseFloat(req.body.interest) || 0;
+            userFinance.loanAmount = loan;
+            userFinance.interestRate = interest;
+        } else if (req.body.formType === 'incomeForm') {
+            const income = parseFloat(req.body.income) || 0;
+            userFinance.income = income;
         }
 
         await userFinance.save();
 
-        //! Redirect back to the finances page after saving
+        // Redirect back to the finances page after saving
         res.redirect("/finances");
     } catch (error) {
         console.error('Finance error:', error);
         res.status(500).send('An error occurred while saving finance data.');
     }
 });
+
 
 app.post("/logout", (req, res) => {
     res.clearCookie("userID");

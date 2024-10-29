@@ -45,6 +45,7 @@
             
                 <section id="balanceForm">
                     <form action="/finances" method="POST">
+                        <input type="hidden" name="formType" value="balanceForm">
                         <label for="balance">Balance:</label>
                         <input type="number" id="balance" name="balance" required>
                         <button type="submit">Submit</button>
@@ -53,20 +54,35 @@
             </section>
             <section id="loans">
                 <h2>Loans</h2>
+                <p><strong>Current Loan (with Interest):</strong> <%= currentLoan %></p>
         
                 <!-- Form to submit a new loan -->
                 <h2>Update Loans</h2>
+                <form action="/finances" method="POST">
+                    <input type="hidden" name="formType" value="loanForm">
+                    <label for="loan">Loan Amount:</label>
+                    <input type="number" id="loan" name="loan" required><br>
+                    <label for="interest">Interest Rate (%):</label>
+                    <input type="number" id="interest" name="interest" required>
+                    <button type="submit">Submit</button>
+                </form>
             </section>
             <section id="income">
                 <h2>Income</h2>
-        
+                <p><strong>Income:</strong> <%= incomeAmount %></p>
                 <!-- Form to submit a new income -->
                 <h2>Update Income</h2>
+                <form action="/finances" method="POST">
+                    <input type="hidden" name="formType" value="incomeForm">
+                    <label for="income">Income Amount:</label>
+                    <input type="number" id="income" name="income" required>
+                    <button type="submit">Submit</button>
+                </form>
             </section>
                 
         </section>
         
-        <div class = "grid-container">
+        <!-- <div class = "grid-container">
             <div class = "calculator-grid ">
                 <textarea type="text" id = "inputtext" placeholder="0"></textarea>
                 <button>C</button>
@@ -90,9 +106,11 @@
                 <button>.</button>
                 <button>=</button>
             </div>
-        </div>
+        </div> -->
     </main>
     <footer>
+        <p>&copy; 2024 Scholar Manager</p>
+        <p>Jeremiah Franco</p>
     </footer>
     <script src="/menu.js"></script>
     <script src="/calc.js"></script>

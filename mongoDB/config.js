@@ -15,7 +15,6 @@ connect.then(() => {
     console.log("Database cannot be connected");
 });
 
-
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -27,7 +26,7 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
-//! Finance Schema
+// Updated Finance Schema with loan fields
 const FinanceSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -37,6 +36,18 @@ const FinanceSchema = new mongoose.Schema({
     balance: {
         type: Number,
         required: true
+    },
+    loanAmount: {  // New field to store loan amount
+        type: Number,
+        default: 0
+    },
+    interestRate: {  // New field to store interest rate
+        type: Number,
+        default: 0
+    },
+    income: {
+        type: Number,
+        default: 0
     },
     transactions: [{
         amount: Number,
@@ -50,12 +61,7 @@ const FinanceSchema = new mongoose.Schema({
 const userModel = new mongoose.model("Users", UserSchema);
 const financeModel = new mongoose.model("Finance", FinanceSchema);
 
-// module.exports = collection;
-// module.exports = financeCollection;
-
 module.exports = {
     userModel,
     financeModel
 };
-
-
