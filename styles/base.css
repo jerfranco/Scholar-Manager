@@ -373,6 +373,10 @@ footer {
     flex-wrap: wrap;
 }
 
+#finances section {
+    height: 100vh;
+}
+
 #financesMain {
     /* display: flex; */
     /* flex-direction: column; */
@@ -434,6 +438,15 @@ button:hover,
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: blue;
+}
+
+input#balance {
+    background-color: white;
+}
+
+input#income {
+    background-color: white;
 }
 
 #balanceForm {
@@ -451,9 +464,11 @@ button:hover,
 #loans {
     width: 33%;
     text-align: center;
+    background-color: green;
 }
 
 #income {
     width: 33%;
     text-align: center;
+    background-color: yellow;
 }

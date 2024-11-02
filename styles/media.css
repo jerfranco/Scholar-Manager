@@ -56,6 +56,67 @@
         padding: 1rem;
         border-radius: 5px;
     }
+    
+    #balance {
+        text-align: center;
+        display: flex;
+        width: 100%;
+
+    }
+
+    #balanceForm form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input#balance {
+        width: 33%;
+    }
+
+    #balanceForm form button {
+        width: 33%;
+    }
+
+    input#loan {
+        width: 33%;
+    }
+
+    input#interest {
+        width: 33%;
+    }
+
+    #loans {
+        width: 100%;
+    }
+
+    #loans form button {
+        width: 33%;
+    }
+    
+    #loans form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #income {
+        width: 100%;
+    }
+
+    #income form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input#income {
+        width: 33%;
+    }
+
+    #income form button {
+        width: 33%;
+    }
 
     /* nav li a {
         padding: 0.5rem;
@@ -148,8 +209,8 @@
     }
 
     #finances section {
-        margin: 1rem;
         height: 33vh;
+        padding-top: 1rem;
     }
 
     #howSection button {
