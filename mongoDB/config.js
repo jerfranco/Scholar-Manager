@@ -1,4 +1,5 @@
 require('dotenv').config();
+// DB_PASSWORD = waFJTryUqCQUbcwn
 
 const mongoose = require('mongoose');
 const dbUsername = 'MrAdoboMan';
