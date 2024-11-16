@@ -76,6 +76,7 @@
 
     #balanceForm form button {
         width: 33%;
+        margin-top: 1rem;
     }
 
     input#loan {
@@ -92,6 +93,7 @@
 
     #loans form button {
         width: 33%;
+        margin-top: 1rem;
     }
     
     #loans form {
@@ -116,6 +118,7 @@
 
     #income form button {
         width: 33%;
+        margin-top: 1rem;
     }
 
     /* nav li a {

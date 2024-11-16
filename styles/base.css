@@ -215,7 +215,7 @@ footer {
     text-align: center;
     min-height: 65vh;
     display: flex;
-    max-height: 569.7px;
+    /* max-height: 569.7px; */
 }
 #mission img {
     width: 50%;
@@ -232,7 +232,9 @@ footer {
 }
 #give {
     text-align: center;
-    min-height: 65vh;
+    height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     background-color: lightblue;
 }
 #give h1 {
@@ -375,6 +377,12 @@ footer {
 
 #finances section {
     height: 100vh;
+    line-height: 50px;
+    padding-top: 27vh;
+}
+
+#finances button {
+    height: 100%;
 }
 
 #financesMain {
@@ -438,19 +446,41 @@ button:hover,
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: blue;
+    background-color: #e2e2e2;
 }
 
 input#balance {
-    background-color: white;
+    /* background-color: white; */
+    height: 100%;
+    border: none;
+    border-bottom: 1px solid black;
 }
 
 input#income {
-    background-color: white;
+    /* background-color: white; */
+    border: none;
+    border-bottom: 1px solid black;
 }
 
-#balanceForm {
+input#loan {
+    /* background-color: white; */
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: #e2e2e2;
+    width: 33%;
+}
+
+input#interest {
+    /* background-color: white; */
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: #e2e2e2;
+    width: 33%;
+}
+
+section#balanceForm {
     width: 100%;
+    padding-top: 0;
 }
 
 #balanceForm form {
@@ -459,16 +489,17 @@ input#income {
     text-wrap: wrap;
     justify-content: center;
     width: 100%;
+    align-items: center;
 }
 
 #loans {
     width: 33%;
     text-align: center;
-    background-color: green;
+    background-color: #e2e2e2;
 }
 
 #income {
     width: 33%;
     text-align: center;
-    background-color: yellow;
+    background-color: #e2e2e2;
 }
