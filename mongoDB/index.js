@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { userModel, financeModel } = require('./config');
 const cookieParser = require('cookie-parser');
 
@@ -222,7 +222,7 @@ app.post("/logout", (req, res) => {
     res.redirect("/index");
 });
 
-const port = 5000;
+const port = 3000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
