@@ -74,6 +74,10 @@
         width: 33%;
     }
 
+    section#balanceForm {
+        padding-top: 0;
+    }
+
     #balanceForm form button {
         width: 33%;
         margin-top: 1rem;
@@ -104,6 +108,7 @@
 
     #income {
         width: 100%;
+        padding-bottom: 2rem;
     }
 
     #income form {
@@ -214,6 +219,10 @@
     #finances section {
         height: 33vh;
         padding-top: 1rem;
+    }
+
+    #financesMain section{
+        height: auto;
     }
 
     #howSection button {
