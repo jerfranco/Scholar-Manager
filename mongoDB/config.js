@@ -59,10 +59,29 @@ const FinanceSchema = new mongoose.Schema({
     }]
 });
 
+const GoalSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users',
+        required: true
+    },
+    description: {
+        type: String,
+        default: "No description provided", // Default description
+        required: true
+    },
+    dueDate: {
+        type: Date,
+        default: () => new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // Default to one week from now
+        required: true
+    }
+});
 const userModel = new mongoose.model("Users", UserSchema);
 const financeModel = new mongoose.model("Finance", FinanceSchema);
+const goalModel = new mongoose.model("Goals", GoalSchema);
 
 module.exports = {
     userModel,
-    financeModel
+    financeModel,
+    goalModel
 };

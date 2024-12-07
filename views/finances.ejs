@@ -81,6 +81,37 @@
             </section>
                 
         </section>
+        <section id="goals">
+            <h2>Goals</h2>
+        
+            <!-- Display existing goals -->
+            <ul>
+                <% if (goals && goals.length > 0) { %>
+                    <% goals.forEach(goal => { %>
+                        <li>
+                            <strong><%= goal.description %></strong>
+                            <% if (goal.dueDate) { %> - Due: <%= goal.dueDate.toDateString() %> <% } %>
+                            <!-- Mark as Completed Form -->
+                            <form action="/goals/<%= goal._id %>/complete" method="POST" style="display: inline;">
+                                <button type="submit">Mark as Completed</button>
+                            </form>
+                        </li>
+                    <% }) %>
+                <% } else { %>
+                    <p>No goals added yet.</p>
+                <% } %>
+            </ul>
+        
+            <!-- Form to add a new goal -->
+            <form action="/goals" method="POST">
+                <label for="description">Goal:</label>
+                <input type="text" id="description" name="description" required><br>
+                <label for="dueDate">Due Date:</label>
+                <input type="date" id="dueDate" name="dueDate"><br>
+                <button type="submit">Add Goal</button>
+            </form>
+        </section>
+        
     </main>
     <footer>
         <p>&copy; 2024 Scholar Manager</p>

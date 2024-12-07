@@ -104,7 +104,8 @@ app.get("/finances", async (req, res) => {
         const loggedIn = !!userId;
 
         if (!userId) {
-            return res.status(401).send("User not logged in.");
+            // return res.status(401).send("User not logged in.");
+            return res.redirect("/login");
         }
 
         // Query the finance model to find the finance record by userId
@@ -119,8 +120,10 @@ app.get("/finances", async (req, res) => {
 
         const incomeAmount = userFinance ? userFinance.income : 0;
 
+        const userGoals = await goalModel.find({ userId });
+
         // Render the finances page and pass the balance to the template
-        res.render("finances", { balance, currentLoan, incomeAmount, loggedIn });
+        res.render("finances", { balance, currentLoan, incomeAmount, loggedIn, goals: userGoals});
     } catch (error) {
         console.error('Error fetching finance data:', error);
         res.status(500).send('An error occurred while fetching finance data.');
@@ -182,7 +185,8 @@ app.post("/finances", async (req, res) => {
     try {
         const userId = req.cookies.userID;
         if (!userId) {
-            return res.status(401).send("User not logged in.");
+            // return res.status(401).send("User not logged in.");
+            
         }
 
         // Find the user's finance record
@@ -216,6 +220,53 @@ app.post("/finances", async (req, res) => {
     }
 });
 
+const { goalModel } = require('./config'); // Ensure goalModel is exported from config.js
+
+app.post('/goals', async (req, res) => {
+    try {
+        const userId = req.cookies.userID; // Get the user ID from the cookie
+        if (!userId) {
+            return res.redirect('/login');
+        }
+
+        const { description, dueDate } = req.body;
+
+        // Create a new goal record
+        const newGoal = new goalModel({
+            userId,
+            description,
+            dueDate: dueDate || undefined, // Optional dueDate
+        });
+
+        await newGoal.save();
+
+        // Redirect back to the finances page
+        res.redirect('/finances');
+    } catch (error) {
+        console.error('Error saving goal:', error);
+        res.status(500).send('An error occurred while saving the goal.');
+    }
+});
+
+app.post('/goals/:goalId/complete', async (req, res) => {
+    try {
+        const userId = req.cookies.userID; // Get the user ID from the cookies
+        if (!userId) {
+            return res.redirect('/login');
+        }
+
+        const goalId = req.params.goalId;
+
+        // Find and remove the goal by its ID
+        await goalModel.findOneAndDelete({ _id: goalId, userId });
+
+        // Redirect back to the finances page
+        res.redirect('/finances');
+    } catch (error) {
+        console.error('Error marking goal as completed:', error);
+        res.status(500).send('An error occurred while completing the goal.');
+    }
+});
 
 app.post("/logout", (req, res) => {
     res.clearCookie("userID");
