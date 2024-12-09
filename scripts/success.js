@@ -1,4 +1,3 @@
-
     // Check if there is a success message in the URL query parameters
     const urlParams = new URLSearchParams(window.location.search);
     const successMessage = urlParams.get('success');
@@ -10,4 +9,3 @@
         messageElement.style.color = 'green'; // Set the text color to green
         messageElement.style.textAlign = 'center'; // Center the text
     }
-

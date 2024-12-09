@@ -505,3 +505,30 @@ section#balanceForm {
     text-align: center;
     background-color: #e2e2e2;
 }
+
+#goals {
+    text-align: center;
+    line-height: 50px;
+    padding: 2rem;
+}
+
+#goals li {
+    list-style-type: none;
+}
+
+#add {
+    background-color: skyblue;
+    /* color: white; */
+    padding: 1rem;
+    width: 33%;
+    border-radius: 25px;
+    border: none;
+    font-size: 32px;
+    transition: 0.5s;
+}
+
+#add:hover {
+    background-color: blue;
+    color: white;
+    border-radius: 0;
+}

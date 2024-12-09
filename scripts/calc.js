@@ -26,4 +26,3 @@ buttons.forEach(button=> {
     let buttonValue = button.innerText;
     button.addEventListener('click', function(){operation(buttonValue)})
 });
-

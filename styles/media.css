@@ -235,6 +235,7 @@
 @media screen and (min-width: 735px) and (max-width: 1000px) {
     #intro {
         flex-direction: column;
+        text-align: center;
     }
     #intro img {
         width: 50%;
@@ -245,6 +246,21 @@
         flex-direction: column;
     }
     #why section {
+        text-align: center;
+        width: auto;
+        margin-left: auto;
+    }
+
+    #why img {
+        margin-right: auto;
+    }
+
+    #how {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #howSection {
         text-align: center;
     }
 }
