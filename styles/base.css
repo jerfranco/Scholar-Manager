@@ -502,12 +502,11 @@ section#balanceForm {
 }
 
 #balanceForm form {
-    /* display: flex;
+    display: flex;
+    /* flex-direction: column; */
     text-wrap: wrap;
     justify-content: center;
     width: 100%;
-    align-items: center; */
-    display: flex;
     align-items: center;
 }
 
