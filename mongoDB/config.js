@@ -50,11 +50,25 @@ const FinanceSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    loanTerm: {  // Field to store loan term in years
+        type: Number,
+        default: 0
+    },
     transactions: [{
         amount: Number,
         date: {
             type: Date,
             default: Date.now
+        }
+    }],
+    expenses: [{
+        description: {
+            type: String,
+            required: true
+        },
+        amount: {
+            type: Number,
+            required: true
         }
     }]
 });

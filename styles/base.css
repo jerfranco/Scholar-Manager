@@ -408,10 +408,21 @@ footer {
 
 #financesMain h3 {
     text-align: center;
+    font-size: 35px;
+}
+
+#financeIntro p {
+    font-size: 25px;
+    text-align: center;
+    line-height: 45px;
+    margin-top: 25px;
 }
 
 #financeIntro {
     text-align: center;
+    /* margin-top: 2rem;
+    margin-bottom: 2rem; */
+    margin: 2rem;
 }
 .grid-container {
     display: grid;
@@ -496,6 +507,30 @@ input#interest {
     width: 33%;
 }
 
+input#term {
+    background-color: #e2e2e2;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+input#description {
+    background-color: #e2e2e2;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+input#dueDate {
+    background-color: #e2e2e2;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+input#amount {
+    background-color: #e2e2e2;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
 section#balanceForm {
     width: 100%;
     padding-top: 0;
@@ -525,11 +560,14 @@ section#balanceForm {
 #goals {
     text-align: center;
     line-height: 50px;
-    padding: 2rem;
+}
+
+#finances #goals {
+    padding-top: 0;
 }
 
 #goals h2 {
-    font-size: 50px;
+    font-size: 40px;
 }
 
 #goals p {
@@ -541,18 +579,46 @@ section#balanceForm {
 }
 
 #add {
-    background-color: skyblue;
-    /* color: white; */
-    padding: 1rem;
     width: 33%;
-    border-radius: 25px;
-    border: none;
-    font-size: 32px;
-    transition: 0.5s;
 }
 
+#expensesButton {
+    width: 33%;
+}
+/*
 #add:hover {
     background-color: blue;
     color: white;
     border-radius: 0;
+} */
+
+#form2 {
+    display: flex;
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: #e2e2e2;
+}
+
+#form2 #expenses {
+    width: 50%;
+    line-height: 50px;  
+}
+
+#form2 #expenses h2:first-child {
+    font-size: 40px;
+}
+
+/* #form2 #expenses li {
+    font-size: 25px;
+    align-items: center;
+    display: flex;
+} */
+
+#form2 #goals {
+    width: 50%;
+}
+
+#finances #expenses {
+    padding-top: 0;
 }

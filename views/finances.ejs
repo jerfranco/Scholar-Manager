@@ -35,11 +35,19 @@
         </nav>
     </header>
     <main id="financesMain">
+        
+            <!-- <h1>Finances</h1> -->
         <section id="financeIntro">
-            <h1>Finances</h1>
-            <h3>Why track your finances?</h3>
-            <p>Tracking your finances can help you stay on top of your expenses and income. It can also help you 
-                plan for the future and set financial goals.</p>
+            <h1>Why track your finances?</h1>
+            <p>Financial tracking is crucial for college students, as it helps them gain control over their finances 
+                and avoid the stress of overspending or accumulating debt. With tuition fees, living expenses, and 
+                personal costs adding up quickly, having a clear overview of their balance, income, and loans empowers 
+                students to make informed decisions. By tracking their expenses, students can better allocate funds, 
+                prioritize essential purchases, and identify opportunities to save. Additionally, monitoring loans and 
+                repayments ensures they don’t miss important deadlines and can plan for the future. A financial web 
+                app that centralizes this information can provide real-time insights, set reminders, and offer 
+                budgeting tools, making it easier for students to stay on top of their financial situation and build 
+                healthy money management habits early on.</p>
         </section>
         
 
@@ -62,8 +70,11 @@
             </section>
             <section id="loans">
                 <h2>Loans</h2>
-                <p><strong>Current Loan (with Interest):</strong> <%= currentLoan %></p>
-        
+                <p><strong>Loan Amount:</strong> $<%= loanAmount %></p>
+                <p><strong>Interest Rate:</strong> <%= interestRate %>%</p>
+                <p><strong>Loan Term:</strong> <%= loanTerm %> years</p>
+                <p><strong>Monthly Payment:</strong> $<%= monthlyPayment.toFixed(2) %></p>
+            
                 <!-- Form to submit a new loan -->
                 <h2>Update Loans</h2>
                 <form action="/finances" method="POST">
@@ -71,10 +82,13 @@
                     <label for="loan">Loan Amount:</label>
                     <input type="number" id="loan" name="loan" required><br>
                     <label for="interest">Interest Rate (%):</label>
-                    <input type="number" id="interest" name="interest" required>
+                    <input type="number" id="interest" name="interest" required><br>
+                    <label for="term">Loan Term (Years):</label>
+                    <input type="number" id="term" name="term" required>
                     <button type="submit">Submit</button>
                 </form>
             </section>
+            
             <section id="income">
                 <h2>Income</h2>
                 <p><strong>Total income:</strong> <%= incomeAmount %></p>
@@ -87,38 +101,70 @@
                     <button type="submit">Submit</button>
                 </form>
             </section>
+            
+            </section>
+            <section id="form2">
+                <section id="expenses">
+                    <h2>Expenses</h2>
+                    <!-- Display current expenses -->
+                    <ul>
+                        <% if (expenses && expenses.length > 0) { %>
+                            <% expenses.forEach(expense => { %>
+                                <li>
+                                    <strong><%= expense.description %></strong> - Amount: $<%= expense.amount.toFixed(2) %>
+                                    <!-- Option to delete an expense -->
+                                    <form action="/expenses/<%= expense._id %>/delete" method="POST" style="display: inline;">
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                </li>
+                            <% }) %>
+                        <% } else { %>
+                            <p>No expenses recorded yet.</p>
+                        <% } %>
+                    </ul>
                 
-        </section>
-        <section id="goals">
-            <h2>Goals</h2>
-        
-            <!-- Display existing goals -->
-            <ul>
-                <% if (goals && goals.length > 0) { %>
-                    <% goals.forEach(goal => { %>
-                        <li>
-                            <strong><%= goal.description %></strong>
-                            <% if (goal.dueDate) { %> - Due: <%= goal.dueDate.toDateString() %> <% } %>
-                            <!-- Mark as Completed Form -->
-                            <form action="/goals/<%= goal._id %>/complete" method="POST" style="display: inline;">
-                                <button type="submit">Mark as Completed</button>
-                            </form>
-                        </li>
-                    <% }) %>
-                <% } else { %>
-                    <p>No goals added yet.</p>
-                <% } %>
-            </ul>
-        
-            <!-- Form to add a new goal -->
-            <form action="/goals" method="POST">
-                <label for="description">Goal:</label>
-                <input type="text" id="description" name="description" required><br>
-                <label for="dueDate">Due Date:</label>
-                <input type="date" id="dueDate" name="dueDate"><br>
-                <button id="add" type="submit">Add Goal</button>
-            </form>
-        </section>
+                    <!-- Form to add a new expense -->
+                    <h2>Add Expense</h2>
+                    <form action="/expenses" method="POST">
+                        <label for="description">Description:</label>
+                        <input type="text" id="description" name="description" required><br>
+                        <label for="amount">Amount:</label>
+                        <input type="number" id="amount" name="amount" step="0.01" required><br>
+                        <button id="expensesButton" type="submit">Add Expense</button>
+                    </form>
+                </section>            
+            
+            <section id="goals">
+                <h2>Goals</h2>
+            
+                <!-- Display existing goals -->
+                <ul>
+                    <% if (goals && goals.length > 0) { %>
+                        <% goals.forEach(goal => { %>
+                            <li>
+                                <strong><%= goal.description %></strong>
+                                <% if (goal.dueDate) { %> - Due: <%= goal.dueDate.toDateString() %> <% } %>
+                                <!-- Mark as Completed Form -->
+                                <form action="/goals/<%= goal._id %>/complete" method="POST" style="display: inline;">
+                                    <button type="submit">Mark as Completed</button>
+                                </form>
+                            </li>
+                        <% }) %>
+                    <% } else { %>
+                        <p>No goals added yet.</p>
+                    <% } %>
+                </ul>
+            
+                <!-- Form to add a new goal -->
+                <form action="/goals" method="POST">
+                    <label for="description">Goal:</label>
+                    <input type="text" id="description" name="description" required><br>
+                    <label for="dueDate">Due Date:</label>
+                    <input type="date" id="dueDate" name="dueDate"><br>
+                    <button id="add" type="submit">Add Goal</button>
+                </form>
+            </section>
+    </section>
         
     </main>
     <footer>

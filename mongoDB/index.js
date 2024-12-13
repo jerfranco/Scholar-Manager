@@ -113,20 +113,90 @@ app.get("/finances", async (req, res) => {
 
         // If no record is found, set balance to 0
         const balance = userFinance ? userFinance.balance : 0;
+        const loanAmount = userFinance && userFinance.loanAmount != null ? userFinance.loanAmount : 0;
+        const interestRate = userFinance && userFinance.interestRate != null ? userFinance.interestRate : 0;
+        const loanTerm = userFinance && userFinance.loanTerm != null ? userFinance.loanTerm : 0;
 
-        const loanAmount = userFinance ? userFinance.loanAmount : 0;
-        const interestRate = userFinance ? userFinance.interestRate : 0;
-        const currentLoan = loanAmount * (1 + interestRate / 100);
+
+        // Calculate monthly payment
+        const monthlyRate = interestRate / 100 / 12;
+        const numPayments = loanTerm * 12;
+        const monthlyPayment =
+            loanAmount && interestRate && loanTerm
+                ? (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, numPayments)) /
+                (Math.pow(1 + monthlyRate, numPayments) - 1)
+                : 0;
 
         const incomeAmount = userFinance ? userFinance.income : 0;
 
         const userGoals = await goalModel.find({ userId });
+        const userExpenses = userFinance ? userFinance.expenses : [];
 
         // Render the finances page and pass the balance to the template
-        res.render("finances", { balance, currentLoan, incomeAmount, loggedIn, goals: userGoals});
+        // res.render("finances", { balance, monthlyPayment, incomeAmount, loggedIn, goals: userGoals, expenses: userExpenses });
+        res.render("finances", { 
+            balance, 
+            loanAmount,        // Add this
+            interestRate,      // Add this
+            loanTerm,          // Add this
+            monthlyPayment, 
+            incomeAmount, 
+            loggedIn, 
+            goals: userGoals, 
+            expenses: userExpenses 
+        });
+            
     } catch (error) {
         console.error('Error fetching finance data:', error);
         res.status(500).send('An error occurred while fetching finance data.');
+    }
+});
+
+app.post("/expenses", async (req, res) => {
+    try {
+        const userId = req.cookies.userID;
+        if (!userId) {
+            return res.redirect("/login");
+        }
+
+        const { description, amount } = req.body;
+        const userFinance = await financeModel.findOne({ userId });
+
+        if (!userFinance) {
+            return res.status(404).send("Finance record not found.");
+        }
+
+        userFinance.expenses.push({ description, amount: parseFloat(amount) });
+        await userFinance.save();
+
+        res.redirect("/finances");
+    } catch (error) {
+        console.error('Error adding expense:', error);
+        res.status(500).send('An error occurred while adding the expense.');
+    }
+});
+
+app.post("/expenses/:expenseId/delete", async (req, res) => {
+    try {
+        const userId = req.cookies.userID;
+        if (!userId) {
+            return res.redirect("/login");
+        }
+
+        const userFinance = await financeModel.findOne({ userId });
+        if (!userFinance) {
+            return res.status(404).send("Finance record not found.");
+        }
+
+        userFinance.expenses = userFinance.expenses.filter(
+            expense => expense._id.toString() !== req.params.expenseId
+        );
+        await userFinance.save();
+
+        res.redirect("/finances");
+    } catch (error) {
+        console.error('Error deleting expense:', error);
+        res.status(500).send('An error occurred while deleting the expense.');
     }
 });
 
@@ -203,8 +273,11 @@ app.post("/finances", async (req, res) => {
         } else if (req.body.formType === 'loanForm') {
             const loan = parseFloat(req.body.loan) || 0;
             const interest = parseFloat(req.body.interest) || 0;
+            const term = parseInt(req.body.term) || 0;
+
             userFinance.loanAmount = loan;
             userFinance.interestRate = interest;
+            userFinance.loanTerm = term;
         } else if (req.body.formType === 'incomeForm') {
             const income = parseFloat(req.body.income) || 0;
             userFinance.income = income;

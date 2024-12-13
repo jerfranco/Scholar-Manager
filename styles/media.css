@@ -54,7 +54,8 @@
     #how img {
         width: 100%;
         padding: 1rem;
-        border-radius: 5px;
+        /* border-radius: 5px; */
+        /* border-radius: 15px;; */
     }
     
     #balance {
@@ -230,6 +231,24 @@
         margin-right: auto;
         width: 50%;
     }
+
+    #form2 {
+        flex-direction: column;
+    }
+    #form2 #expenses {
+        width: 100%;
+    }
+    #form2 #goals {
+        width: 100%;
+    }
+
+    #form2 section {
+        padding-top: 2rem;
+    }
+
+    #financeIntro p{
+        font-size: 20px;
+    }
 }
 
 @media screen and (min-width: 735px) and (max-width: 1000px) {
@@ -245,14 +264,23 @@
     #why {
         flex-direction: column;
     }
+
+    #why h1 {
+        width: 100%;
+    }
+    #why p {
+        width: 100%;
+    }
     #why section {
         text-align: center;
-        width: auto;
+        width: 100%;
         margin-left: auto;
     }
 
     #why img {
         margin-right: auto;
+        width: 70%;
+        margin-top: 2rem;
     }
 
     #how {
@@ -260,7 +288,26 @@
         text-align: center;
     }
 
+    #how h1 {
+        width: 100%;
+    }
+
+    #how p {
+        width: 100%;
+    }
+
     #howSection {
         text-align: center;
+    }
+    #howSection button {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #how img {
+        margin-right: auto;
+        margin-top: 2rem;
+        width: 70%;
     }
 }
