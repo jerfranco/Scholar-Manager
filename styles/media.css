@@ -310,4 +310,7 @@
         margin-top: 2rem;
         width: 70%;
     }
+    #financeIntro p {
+        font-size: 20px;
+    }
 }
